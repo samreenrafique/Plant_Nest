@@ -55,6 +55,7 @@
             <div class="produts-details--content mb-50">
             <?php
             $id = $_GET["id"];
+            
              $query = "SELECT p.*, c.cate_name FROM products p
              JOIN category c ON p.cate_id = c.cate_id where pr_id = $id";
    $result = mysqli_query($conn, $query);
@@ -124,57 +125,43 @@
                     <div class="col-12">
                         <div class="product_details_tab clearfix">
                             <!-- Tabs -->
-                            <ul class="nav nav-tabs" role="tablist" id="product-details-tab">
+                            <ul class="nav nav-tabs" role="" id="product-details-tab">
                               
-                                <li class="nav-item">
+                            <a href="" class="nav-link">Review</a>
+                                <!-- <li class="nav-item">
                                     <a href="#reviews" class="nav-link" data-toggle="tab" role="tab">Reviews <span class="text-muted">(1)</span></a>
-                                </li>
+                                </li> -->
                             </ul>
                             <!-- Tab Content -->
-                            <div class="tab-content">
+                            <div class="">
                              
-                                <div role="tabpanel" class="tab-pane fade" id="reviews">
+                                <div role="tabpanel" class="" id="reviews">
                                     <div class="reviews_area">
                                         <ul>
+
                                             <li>
-                                                <div class="single_user_review mb-15">
-                                                    <div class="review-rating">
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                        <span>for Quality</span>
+                                                <?php
+                                                    $fetch_rat = mysqli_query($conn,"SELECT * FROM `reviews` where p_id = $id");
+                                                    while($data = mysqli_fetch_array($fetch_rat)){ ?>
+                                                        <div class="single_user_review mb-15">
+                                                        <div class="review-rating">
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            
+                                                        </div>
+                                                        <div class="review-details">
+                                                        <span><b><?php echo $data[5]; ?></b> Commented</span>
+                                                        <span><?php echo $data[2]; ?></span>
+                                                        </div>
                                                     </div>
-                                                    <div class="review-details">
-                                                        <p>by <a href="#">Colorlib</a> on <span>12 Sep 2018</span></p>
-                                                    </div>
-                                                </div>
-                                                <div class="single_user_review mb-15">
-                                                    <div class="review-rating">
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                        <span>for Design</span>
-                                                    </div>
-                                                    <div class="review-details">
-                                                        <p>by <a href="#">Colorlib</a> on <span>12 Sep 2018</span></p>
-                                                    </div>
-                                                </div>
-                                                <div class="single_user_review">
-                                                    <div class="review-rating">
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                        <span>for Value</span>
-                                                    </div>
-                                                    <div class="review-details">
-                                                        <p>by <a href="#">Colorlib</a> on <span>12 Sep 2018</span></p>
-                                                    </div>
+                                               <?php     }
+
+                                                ?>
+                                                
+                                                   
                                                 </div>
                                             </li>
                                         </ul>
@@ -182,36 +169,34 @@
 
                                     <div class="submit_a_review_area mt-50">
                                         <h4>Submit A Review</h4>
-                                        <form action="#" method="post">
+                                        <form action="addreview.php" method="post">
                                             <div class="row">
                                                 <div class="col-12">
                                                     <div class="form-group d-flex align-items-center">
+                                                        <input type="hidden" name="id" value="<?php echo $id?>">
                                                         <span class="mr-15">Your Ratings:</span>
                                                         <div class="stars">
-                                                            <input type="radio" name="star" class="star-1" id="star-1">
-                                                            <label class="star-1" for="star-1">1</label>
-                                                            <input type="radio" name="star" class="star-2" id="star-2">
-                                                            <label class="star-2" for="star-2">2</label>
-                                                            <input type="radio" name="star" class="star-3" id="star-3">
-                                                            <label class="star-3" for="star-3">3</label>
-                                                            <input type="radio" name="star" class="star-4" id="star-4">
-                                                            <label class="star-4" for="star-4">4</label>
-                                                            <input type="radio" name="star" class="star-5" id="star-5">
-                                                            <label class="star-5" for="star-5">5</label>
-                                                            <span></span>
+                                                            <select name="rating" id="" class="form-control" >
+                                                                <option value="1">1</option>
+                                                                <option value="2">2 </option>
+                                                                <option value="3">3</option>
+                                                                <option value="4">4 </option>
+                                                                <option value="5">5</option>
+
+                                                            </select>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-12 col-md-6">
                                                     <div class="form-group">
                                                         <label for="name">Nickname</label>
-                                                        <input type="email" class="form-control" id="name" placeholder="Nazrul">
+                                                        <input type="text" name="name" class="form-control" id="name" placeholder="Nazrul">
                                                     </div>
                                                 </div>
                                                 <div class="col-12 col-md-6">
                                                     <div class="form-group">
                                                         <label for="options">Reason for your rating</label>
-                                                        <select class="form-control" id="options">
+                                                        <select class="form-control" id="options" name="reason">
                                                             <option>Quality</option>
                                                             <option>Value</option>
                                                             <option>Design</option>
@@ -223,14 +208,16 @@
                                                 <div class="col-12">
                                                     <div class="form-group">
                                                         <label for="comments">Comments</label>
-                                                        <textarea class="form-control" id="comments" rows="5" data-max-length="150"></textarea>
+                                                        <textarea class="form-control" id="comments" rows="5" data-max-length="150" name="comment"></textarea>
                                                     </div>
                                                 </div>
                                                 <div class="col-12">
-                                                    <button type="submit" class="btn alazea-btn">Submit Your Review</button>
+                                                    <button type="submit" class="btn alazea-btn" name="btn">Submit Your Review</button>
                                                 </div>
                                             </div>
                                         </form>
+
+                                       
                                     </div>
                                 </div>
 
