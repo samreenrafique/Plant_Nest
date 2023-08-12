@@ -49,11 +49,22 @@
                 </div>
             </div>
         </div>
-        <!-- ##### Breadcrumb Area End ##### -->
-
+      
         <!-- ##### Single Product Details Area Start ##### -->
         <section class="single_product_details_area mb-50">
             <div class="produts-details--content mb-50">
+            <?php
+            $id = $_GET["id"];
+             $query = "SELECT p.*, c.cate_name FROM products p
+             JOIN category c ON p.cate_id = c.cate_id where pr_id = $id";
+   $result = mysqli_query($conn, $query);
+
+   if (mysqli_num_rows($result) > 0) {
+        
+      
+    
+                        while ($row = mysqli_fetch_assoc($result)) {
+                        ?>
                 <div class="container">
                     <div class="row justify-content-between">
 
@@ -62,42 +73,25 @@
                                 <div id="product_details_slider" class="carousel slide" data-ride="carousel">
                                     <div class="carousel-inner">
                                         <div class="carousel-item active">
-                                            <a class="product-img" href="img/bg-img/49.jpg" title="Product Image">
-                                                <img class="d-block w-100" src="img/bg-img/49.jpg" alt="1">
-                                            </a>
-                                        </div>
-                                        <div class="carousel-item">
-                                            <a class="product-img" href="img/bg-img/49.jpg" title="Product Image">
-                                                <img class="d-block w-100" src="img/bg-img/49.jpg" alt="1">
-                                            </a>
-                                        </div>
-                                        <div class="carousel-item">
-                                            <a class="product-img" href="img/bg-img/49.jpg" title="Product Image">
-                                                <img class="d-block w-100" src="img/bg-img/49.jpg" alt="1">
+                                            <a class="product-img" href="" title="Product Image">
+                                                <img class="d-block w-100" src="../../darkpan/upload/product/<?php echo $row["pr_img"] ?>" alt="1">
                                             </a>
                                         </div>
                                     </div>
-                                    <ol class="carousel-indicators">
-                                        <li class="active" data-target="#product_details_slider" data-slide-to="0" style="background-image: url(img/bg-img/49.jpg);">
-                                        </li>
-                                        <li data-target="#product_details_slider" data-slide-to="1" style="background-image: url(img/bg-img/49.jpg);">
-                                        </li>
-                                        <li data-target="#product_details_slider" data-slide-to="2" style="background-image: url(img/bg-img/49.jpg);">
-                                        </li>
-                                    </ol>
                                 </div>
                             </div>
                         </div>
 
                         <div class="col-12 col-md-6 mt-5">
                             <div class="single_product_desc">
-                                <h4 class="title mt-5">Recuerdos Plant</h4>
-                                <h4 class="price ">$9.99</h4>
+                                <h4 class="title mt-5"><?php echo $row["pr_name"] ?></h4>
+                                <h4 class="price ">Rs. <?php echo $row["pr_price"] ?></h4>
                                 <div class="products--meta">
-                                    <p><span>SKU:</span> <span>CT201807</span></p>
-                                    <p><span>Category:</span> <span>Outdoor Plants</span></p>
+                                    <p><span>Status:</span> <span><?php echo $row["p_status"] ?></span></p>
+                                    <p><span>Category:</span> <span><?php echo $row["cate_name"] ?></span></p>
                                 </div>
-                                <div class="cart--area d-flex flex-wrap align-items-center">
+                                <?php if($row["p_status"] == "Available"){ ?>
+                                    <div class="cart--area d-flex flex-wrap align-items-center">
                                     <!-- Add to Cart Form -->
                                     <form class="cart clearfix d-flex align-items-center" method="post">
                                         <div class="quantity">
@@ -110,9 +104,11 @@
                                     <!-- Wishlist & Compare -->
                                     <div class="wishlist-compare d-flex flex-wrap align-items-center">
                                         <a href="#" class="wishlist-btn ml-15"><i class="icon_heart_alt"></i></a>
-                                        <a href="#" class="compare-btn ml-15"><i class="arrow_left-right_alt"></i></a>
+                                        
                                     </div>
                                 </div>
+                              <?php  }?>
+                                
 
                                
 
@@ -120,6 +116,7 @@
                         </div>
                     </div>
                 </div>
+                <?php }} ?>
             </div>
 
             <div class="container">
@@ -128,40 +125,14 @@
                         <div class="product_details_tab clearfix">
                             <!-- Tabs -->
                             <ul class="nav nav-tabs" role="tablist" id="product-details-tab">
-                                <li class="nav-item">
-                                    <a href="#description" class="nav-link active" data-toggle="tab" role="tab">Description</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#addi-info" class="nav-link" data-toggle="tab" role="tab">Additional Information</a>
-                                </li>
+                              
                                 <li class="nav-item">
                                     <a href="#reviews" class="nav-link" data-toggle="tab" role="tab">Reviews <span class="text-muted">(1)</span></a>
                                 </li>
                             </ul>
                             <!-- Tab Content -->
                             <div class="tab-content">
-                                <div role="tabpanel" class="tab-pane fade show active" id="description">
-                                    <div class="description_area">
-                                        <p>Sed a facilisis orci. Curabitur magna urna, varius placerat placerat sodales, pretium vitae orci. Aliquam erat volutpat. Cras sit amet suscipit magna. Quisque turpis odio, facilisis vel eleifend eu, dignissim ac odio.</p>
-                                        <p>Interdum et malesuada fames ac ante ipsum primis in faucibus. In scelerisque augue at the moment mattis. Proin vitae arcu sit amet justo sollicitudin tincidunt sit amet ut velit.Proin placerat vel augue eget euismod. Phasellus cursus orci eu tellus vestibulum, vestibulum urna accumsan. Vestibulum ut ullamcorper sapien. Pellentesque molestie, est ac vestibulum eleifend, lorem ipsum mollis ipsum.</p>
-                                    </div>
-                                </div>
-                                <div role="tabpanel" class="tab-pane fade" id="addi-info">
-                                    <div class="additional_info_area">
-                                        <p>What should I do if I receive a damaged parcel?
-                                            <br> <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit impedit similique qui, itaque delectus labore.</span>
-                                        </p>
-                                        <p>I have received my order but the wrong item was delivered to me.
-                                            <br> <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facilis quam voluptatum beatae harum tempore, ab?</span>
-                                        </p>
-                                        <p>Product Receipt and Acceptance Confirmation Process
-                                            <br> <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum ducimus, temporibus soluta impedit minus rerum?</span>
-                                        </p>
-                                        <p>How do I cancel my order?
-                                            <br> <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum eius eum, minima!</span>
-                                        </p>
-                                    </div>
-                                </div>
+                             
                                 <div role="tabpanel" class="tab-pane fade" id="reviews">
                                     <div class="reviews_area">
                                         <ul>

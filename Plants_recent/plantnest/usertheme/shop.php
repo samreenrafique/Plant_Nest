@@ -59,7 +59,7 @@
                     <div class="shop-sorting-data d-flex flex-wrap align-items-center justify-content-between">
                         <!-- Shop Page Count -->
                         <div class="shop-page-count">
-                            <p>Showing 1–9 of 72 results</p>
+                    
                         </div>
                         <!-- Search by Terms -->
                         <div class="search_by_terms">
@@ -100,6 +100,7 @@ if (mysqli_num_rows($res) > 0) {
 ?>
 <div class="col-12 col-md-4 col-lg-3">
     <div class="shop-sidebar-area">
+        
         <div class="shop-widget best-seller mb-50">
             <h4 class="widget-title">Best Seller</h4>
             <div class="widget-desc">
@@ -109,11 +110,11 @@ if (mysqli_num_rows($res) > 0) {
                 <!-- Single Best Seller Products -->
                 <div class="single-best-seller-product d-flex align-items-center">
                     <div class="product-thumbnail">
-                        <a href="shop-details.php"> <img src="../../darkpan/upload/product/<?php echo $row["pr_img"] ?>" alt="<?php echo $row["pr_name"] ?>" width="50" height="50">
+                        <a href="shop-details.php?id=<?php echo $row["pr_id"] ?>"> <img src="../../darkpan/upload/product/<?php echo $row["pr_img"] ?>" alt="<?php echo $row["pr_name"] ?>" width="50" height="50">
                         </a>
                     </div>
                     <div class="product-info">
-                        <a href="shop-details.php"><?php echo $row["pr_name"] ?></a>
+                        <a href="shop-details.php?id=<?php echo $row["pr_id"] ?>"><?php echo $row["pr_name"] ?></a>
                         <p>PKR. <?php echo $row["pr_price"] ?></p>
                     </div>
                 </div>
@@ -129,8 +130,20 @@ if (mysqli_num_rows($res) > 0) {
                     <div class="shop-products-area">
                     <?php
                 include "../config.php";
-                $query = "SELECT p.*, c.cate_name FROM products p
-                          JOIN category c ON p.cate_id = c.cate_id";
+                if (isset($_GET["cat_id"])) {
+                    $id = $_GET["cat_id"];
+                
+                    $query = "SELECT p.*, c.cate_name FROM products p
+                              JOIN category c ON p.cate_id = c.cate_id where p.cate_id=$id";
+                    
+                }
+                else{
+                    $query = "SELECT p.*, c.cate_name FROM products p
+                    JOIN category c ON p.cate_id = c.cate_id ";
+                }
+               
+                
+               
                 $result = mysqli_query($conn, $query);
 
                 if (mysqli_num_rows($result) > 0) {
@@ -146,7 +159,7 @@ if (mysqli_num_rows($res) > 0) {
                                     <!-- Product Image -->
                          
                                     <div class="product-img">
-                                        <a href="shop-details.php"><img src="../../darkpan/upload/product/<?php echo $row["pr_img"] ?>"  alt="<?php echo $row["pr_name"] ?>"></a>
+                                        <a href="shop-details.php?id=<?php echo $row["pr_id"] ?>"><img src="../../darkpan/upload/product/<?php echo $row["pr_img"] ?>"  alt="<?php echo $row["pr_name"] ?>"></a>
                                         <!-- Product Tag -->
                                         <div class="product-tag">
                                             <a href="#">Hot</a>
@@ -159,7 +172,7 @@ if (mysqli_num_rows($res) > 0) {
                                     </div>
                                     <!-- Product Info -->
                                     <div class="product-info mt-15 text-center">
-                                        <a href="shop-details.php">
+                                        <a href="shop-details.php?id=<?php echo $row["pr_id"] ?>">
                                             <p><?php echo $row["pr_name"] ?></p>
                                         </a>
                                         <h6>PKR. <?php echo $row["pr_price"] ?></h6>

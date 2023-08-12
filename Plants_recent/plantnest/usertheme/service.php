@@ -20,12 +20,8 @@
 
 <?php
 include "../config.php";
-
-$abt = "SELECT * FROM `about` order by abt_id desc limit 1";
-$res = mysqli_query($conn, $abt);
-
-if (mysqli_num_rows($res) > 0) {
 ?>
+
 <body>
     <!-- Preloader -->
 
@@ -60,7 +56,7 @@ if (mysqli_num_rows($res) > 0) {
     <!-- ##### About Area Start ##### -->
     <section class="about-us-area">
         <div class="container">
-            <div class="row justify-content-between">
+          
             
 
                 <div class="col-12 col-lg-12">
@@ -79,13 +75,16 @@ if (mysqli_num_rows($res) > 0) {
                                     <img src="../../darkpan/upload/service/<?php echo $row[3]?>" alt="">
                                     <h5><?php echo $row[1] ?></h5>
                                     <p class="text-justify"><?php echo $row[2] ?></p>
+                                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                    <span class="btn btn-success">Rs. <?php echo $row[4] ?>  <span>
+   </div>
                                 </div>
                             </div>
 <?php } ?>
                             
                         </div>
                     </div>
-                </div>
+             
             </div>
         </div>
 
@@ -102,70 +101,7 @@ if (mysqli_num_rows($res) > 0) {
     <!-- ##### Testimonial Area End ##### -->
 
     <!-- ##### Cool Facts Area Start ##### -->
-    <section class="cool-facts-area bg-img section-padding-100-0" style="background-image: url(img/bg-img/cool-facts.png);">
-        <div class="container">
-            <div class="row">
-
-                <!-- Single Cool Facts Area -->
-                <div class="col-12 col-sm-6 col-md-3">
-                    <div class="single-cool-fact d-flex align-items-center justify-content-center mb-100">
-                        <div class="cf-icon">
-                            <img src="img/core-img/cf1.png" alt="">
-                        </div>
-                        <div class="cf-content">
-                            <h2><span class="counter">20</span></h2>
-                            <h6>AWARDS</h6>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Single Cool Facts Area -->
-                <div class="col-12 col-sm-6 col-md-3">
-                    <div class="single-cool-fact d-flex align-items-center justify-content-center mb-100">
-                        <div class="cf-icon">
-                            <img src="img/core-img/cf2.png" alt="">
-                        </div>
-                        <div class="cf-content">
-                            <h2><span class="counter">70</span></h2>
-                            <h6>PROJECTS</h6>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Single Cool Facts Area -->
-                <div class="col-12 col-sm-6 col-md-3">
-                    <div class="single-cool-fact d-flex align-items-center justify-content-center mb-100">
-                        <div class="cf-icon">
-                            <img src="img/core-img/cf3.png" alt="">
-                        </div>
-                        <div class="cf-content">
-                            <h2><span class="counter">30</span>+</h2>
-                            <h6>HAPPY CLIENTS</h6>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Single Cool Facts Area -->
-                <div class="col-12 col-sm-6 col-md-3">
-                    <div class="single-cool-fact d-flex align-items-center justify-content-center mb-100">
-                        <div class="cf-icon">
-                            <img src="img/core-img/cf4.png" alt="">
-                        </div>
-                        <div class="cf-content">
-                            <h2><span class="counter">80</span>K+</h2>
-                            <h6>REVENUE</h6>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-        <!-- Side Image -->
-        <div class="side-img wow fadeInUp" data-wow-delay="500ms">
-            <img src="img/core-img/pot.png" alt="">
-        </div>
-    </section>
+   
     <!-- ##### Cool Facts Area End ##### -->
 
     <!-- ##### Team Area Start ##### -->

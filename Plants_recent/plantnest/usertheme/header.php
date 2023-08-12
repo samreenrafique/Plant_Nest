@@ -152,7 +152,7 @@ if(mysqli_num_rows($result)>0)
          
                       
                       ?>
-                                    <li><a href="index.php"><?php echo $row["cate_name"] ?></a></li>
+                                    <li><a href="shop.php?cat_id=<?php echo $row["cate_id"] ?>"><?php echo $row["cate_name"] ?></a></li>
                                     <?php }} ?>
                                 </ul>
                             </li>
